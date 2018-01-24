@@ -1,0 +1,9 @@
+syntax = "proto3";
+package com.zhjl.tech.store.chained.protobuf.example;
+
+message Example {
+    string version = 1;
+  	string ordersn = 2;
+  	string expired = 3;
+    bytes hash = 4;
+}

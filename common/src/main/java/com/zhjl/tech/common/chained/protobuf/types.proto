@@ -1,0 +1,109 @@
+syntax = "proto3";
+package com.zhjl.tech.store.chained.util.protobuf;
+
+message Cz {
+	//docType is used to distinguish the various types of objects in state database
+	//now: 'cz'
+  	string docType = 1;
+
+	/**  本次操作的时间,日期格式 yyyyMMdd-HHmmss **/
+  	string operationTime = 2;
+
+	/** [上链数据]订单号,全平台唯一标识. size=18*/
+  	string ordersn = 3;
+
+	/** [上链数据]钱包网络地址。表示终端用户方式 */
+  	string walletAddr = 4;
+
+	/** [上链数据]用户钱包公钥。*/
+  	string publicKey = 5;
+
+	/** 第一次上链时间，不会变动。格式	yyyyMMdd-HHmmss */
+  	string chainTime = 6;
+
+	/*是否过期。 0否，1是 */
+  	string expired = 7;
+
+	/**存证详情的json串。类型参见czDetail. json编码后的base编码形式 */
+  	bytes czDetail = 8;
+}
+
+//存证详细内容. endfix is '_1' means that it is the first edition of CzDetail
+message CzDetail_1 {
+
+	////[上链数据]存证记录版本。格式：1-2^16递增版本号.版本号与字典有关联
+	/// the version right now is '1'
+  	string version = 1;
+
+	//[上链数据]渠道业务签名
+  	string platformSign = 2;
+
+	//[上链数据]渠道业务签名
+  	string bizSign = 3;
+
+	/** [上链数据]渠道来源 */
+  	string channelId = 4;
+
+	/** [上链数据]业务类型。数据文件、视屏、音频、压缩等方式 */
+  	string bizType = 5;
+
+	/** [上链数据]源文件名 */
+  	string fileName = 6;
+
+	/** [上链数据]文件类型 */
+  	string fileType = 7;
+
+	/** [上链数据]源文件长度 */
+  	string fileSize = 8;
+
+	/** [上链数据]文件签名。使用本人钱包私钥对该数据进行计算 */
+  	string fileSign = 9;
+
+	/** [上链数据]文件哈希值。 sm3 */
+  	string fileHash = 10;
+
+	/** [上链数据]权属人类型。1自然人，2法人，0其他。如果考虑隐私安全，此处可以进行加密*/
+  	string ownerType = 11;
+
+	/** [上链数据]权属人身份标识。身份证号、社会信用代码 */
+  	string ownerId = 12;
+
+	/** [上链数据]权属人名称 */
+  	string ownerName = 13;
+
+	/** [上链数据]当前存证持续时间(天),从start_time开始算. */
+  	string duration = 14;
+
+	/** [上链数据]订单号,全平台唯一标识. 上链的key字典*/
+  	string ordersn = 15;
+
+	/** [上链数据]续期的原始单号,. 上链的key字典*/
+  	string originalOrdersn = 16;
+
+	/** [上链数据]服务商 */
+  	string provinderId = 17;
+
+	/** [上链数据]钱包网络地址。表示终端用户方式 */
+  	string walletAddr = 18;
+
+	/** [上链数据]用户钱包公钥。 */
+  	string publicKey = 19;
+
+	/** [上链数据]客户签名。客户使用本人的钱包中私钥，对该该存证记录的字段进行计算 */
+  	string attestSign = 20;
+
+	/** [上链数据]存证类型标识。1文件存证，2hash存证 */
+  	string attestType = 21;
+
+	/** [上链数据]存证起始时间 所有的日期格式：20170728-172911 */
+  	string originTime = 22;
+
+	/** [上链数据]当前存证起始时间 */
+  	string startTime = 23;
+
+	/** [上链数据]存证描述信息 */
+  	string description = 24;
+
+	/** [上链数据]本次存证订单费用.单位：元 */
+  	string price = 25;
+}

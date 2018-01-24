@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhjl.tech.store.mapper.store.TempOrderMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="TempOrder_List">
+		id, update_time AS updateTime, create_time AS createTime, version,ancestors_ordersn AS ancestorsOrdersn,parent_ordersn AS parentOrdersn, ordersn, channel_id AS channelId, channel_userid AS channelUserid, channel_ordersn AS channelOrdersn, biz_sign AS bizSign, provinder_id AS provinderId, chained,state,state_time AS stateTime, wallet_addr AS walletAddr, public_key AS publicKey, attest_sign AS attestSign, attest_type AS attestType, biz_type AS bizType, file_name AS fileName, file_type AS fileType, file_size AS fileSize, file_sign AS fileSign, file_hash AS fileHash,file_addr AS fileAddr,  encrypted, encrypt_alog AS encryptAlog, encrypt_key AS encryptKey, owner_type AS ownerType, owner_id AS ownerId, owner_name AS ownerName, agent_name AS agentName, agent_phone AS agentPhone, agent_email AS agentEmail, origin_time AS originTime, start_time AS startTime, duration, description, price, request_time AS requestTime,platform_sign AS platformSign
+	</sql>
+
+	<!--根据渠道唯一标识查询订单-->
+	<select id="getTempOrderByChannelOrdersn" resultType="TempOrder">
+		select
+		<include refid="TempOrder_List"/>
+		FROM temp_order t
+		WHERE t.channel_ordersn=#{channelOrdersn}
+		limit 1
+	</select>
+
+</mapper>

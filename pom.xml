@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.zjl.tech</groupId>
+    <artifactId>cz</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>attest</module>
+        <module>store</module>
+        <module>interface</module>
+        <module>tech</module>
+        <module>common</module>
+        <module>ordersn</module>
+        <module>channelTest</module>
+        <module>tasks</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring.version>4.2.0.RELEASE</spring.version>
+        <junit.version>4.12</junit.version>
+        <druid.version>1.0.26</druid.version>
+        <fastjson.version>1.2.8</fastjson.version>
+        <mybaitsplus.version>1.4.7</mybaitsplus.version>
+        <mysql.version>5.1.38</mysql.version>
+        <slf4j.version>1.7.19</slf4j.version>
+        <aspectjweaver.version>1.8.8</aspectjweaver.version>
+        <fileupload.version>1.3.1</fileupload.version>
+        <jstl.version>1.2</jstl.version>
+    </properties>
+
+    <profiles>
+        <profile>
+            <!-- 本地开发环境 -->
+            <id>dev</id>
+            <properties>
+                <profiles.active>dev</profiles.active>
+                <interface.log.info.path>d:/logs/interface/interface-info-</interface.log.info.path>
+                <attest.log.info.path>d:/logs/attest/attest-info-</attest.log.info.path>
+                <store.log.info.path>d:/logs/store/store-info-</store.log.info.path>
+                <channelTest.log.info.path>d:/logs/channelTest/channelTest-info-</channelTest.log.info.path>
+                <ordersn.log.info.path>d:/logs/ordersn/ordersn-info-</ordersn.log.info.path>
+                <tasks.log.info.path>d:/logs/tasks/tasks-info-</tasks.log.info.path>
+
+                <interface.log.warn.path>d:/logs/interface/interface-warn-</interface.log.warn.path>
+                <attest.log.warn.path>d:/logs/attest/attest-warn-</attest.log.warn.path>
+                <store.log.warn.path>d:/logs/store/store-warn-</store.log.warn.path>
+                <channelTest.log.warn.path>d:/logs/channelTest/channelTest-warn-</channelTest.log.warn.path>
+                <ordersn.log.warn.path>d:/logs/ordersn/ordersn-warn-</ordersn.log.warn.path>
+                <tasks.log.warn.path>d:/logs/tasks/tasks-warn-</tasks.log.warn.path>
+                <dao.log.level>DEBUG</dao.log.level>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <!-- 测试环境 -->
+            <id>testpro</id>
+            <properties>
+                <profiles.active>testpro</profiles.active>
+                <interface.log.info.path>/logs/interface-info-</interface.log.info.path>
+                <attest.log.info.path>/logs/attest-info-</attest.log.info.path>
+                <store.log.info.path>/logs/store-info-</store.log.info.path>
+                <channelTest.log.info.path>/logs/channelTest-info-</channelTest.log.info.path>
+                <ordersn.log.info.path>/logs/ordersn-info-</ordersn.log.info.path>
+                <tasks.log.info.path>/logs/tasks-info-</tasks.log.info.path>
+
+                <interface.log.warn.path>/logs/interface-warn-</interface.log.warn.path>
+                <attest.log.warn.path>/logs/attest-warn-</attest.log.warn.path>
+                <store.log.warn.path>/logs/store-warn-</store.log.warn.path>
+                <channelTest.log.warn.path>/logs/channelTest-warn-</channelTest.log.warn.path>
+                <ordersn.log.warn.path>/logs/ordersn-warn-</ordersn.log.warn.path>
+                <tasks.log.warn.path>/logs/tasks-warn-</tasks.log.warn.path>
+
+                <dao.log.level>INFO</dao.log.level>
+            </properties>
+        </profile>
+        <profile>
+            <!-- 正式环境 -->
+            <id>pro</id>
+            <properties>
+                <profiles.active>pro</profiles.active>
+                <profiles.active>testpro</profiles.active>
+                <interface.log.info.path>/logs/interface-info-</interface.log.info.path>
+                <attest.log.info.path>/logs/attest-info-</attest.log.info.path>
+                <store.log.info.path>/logs/store-info-</store.log.info.path>
+                <channelTest.log.info.path>/logs/channelTest-info-</channelTest.log.info.path>
+                <ordersn.log.info.path>/logs/ordersn-info-</ordersn.log.info.path>
+                <tasks.log.info.path>/logs/tasks-info-</tasks.log.info.path>
+
+                <interface.log.warn.path>/logs/interface-warn-</interface.log.warn.path>
+                <attest.log.warn.path>/logs/attest-warn-</attest.log.warn.path>
+                <store.log.warn.path>/logs/store-warn-</store.log.warn.path>
+                <channelTest.log.warn.path>/logs/channelTest-warn-</channelTest.log.warn.path>
+                <ordersn.log.warn.path>/logs/ordersn-warn-</ordersn.log.warn.path>
+                <tasks.log.warn.path>/logs/tasks-warn-</tasks.log.warn.path>
+
+                <dao.log.level>INFO</dao.log.level>
+            </properties>
+        </profile>
+    </profiles>
+
+    <dependencies>
+
+        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>23.0-rc1</version>
+        </dependency>
+
+
+        <!--  通用辅助工具  -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>4.2.0.Final</version>
+        </dependency>
+
+        <!-- rabbitmq -->
+        <!-- https://mvnrepository.com/artifact/com.rabbitmq/amqp-client -->
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+            <version>4.0.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.amqp</groupId>
+            <artifactId>spring-rabbit</artifactId>
+            <version>1.7.3.RELEASE</version>
+        </dependency>
+
+        <!-- 方便bean的属性复制等操作 -->
+        <!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.9.0</version>
+        </dependency>
+
+        <!-- JUnit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${spring.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>4.2.0.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- AOP -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectjweaver.version}</version>
+        </dependency>
+
+        <!-- Mysql -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
+
+        <!-- Mybatis-Plus -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus</artifactId>
+            <version>${mybaitsplus.version}</version>
+        </dependency>
+
+        <!-- Druid -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
+
+        <!-- FastJson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+
+        <!--; logback configuration -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+            <version>1.7.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>1.56</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

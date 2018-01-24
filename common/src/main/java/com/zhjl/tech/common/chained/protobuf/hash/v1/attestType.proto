@@ -1,0 +1,94 @@
+syntax = "proto3";
+package com.zhjl.tech.store.chained.protobuf.hash.v1;
+
+message AttestType_1 {
+	/** [上链数据]存证记录版本。格式：1-2^16递增版本号 。 当前值：1 */
+	string version = 1;
+
+	////////////////////////////////////////////////////////////////请求参数开始
+
+	/** [上链数据]该存证记录根订单号。参与bizSign生成，参与platformSign生成 */
+	string ancestorsOrdersn = 2;
+
+	/**[上链数据]续期的上一次订单号。参与bizSign生成，参与platformSign生成  */
+	string parentOrdersn = 3;
+
+	/** [上链数据]订单号,全平台唯一标识.，参与platformSign生成 */
+	string ordersn = 4;
+
+	/** [上链数据]渠道id,参与bizSign生成，参与platformSign生成 not null*/
+	string channelId = 5;
+
+	/** [上链数据]渠道用户id,参与bizSign生成，参与platformSign生成 not null*/
+	string channelUserid = 6;
+
+	/** [上链数据]交易标识。渠道存证订单唯一标识。参与bizSign生成，参与platformSign生成  not null*/
+	string channelOrdersn= 7;
+
+	/** [上链数据]渠道业务签名。 参与platformSign生成  not null */
+	string bizSign = 8;
+
+	/** [上链数据]服务商。暂时不用201710 */
+	string provinderId = 9;
+
+	/**  [上链数据]入链情况。1入链，0不入链。参与bizSign生成，参与platformSign生成  not null*/
+	string chained = 10;
+
+	/** [上链数据]钱包网络地址。表示终端用户方式 */
+	string walletAddr = 11;
+
+	/** [上链数据]用户钱包公钥。 */
+	string publicKey = 12;
+
+	/** [上链数据]客户签名。客户使用本人的钱包中私钥，对该该存证记录的字段进行计算 */
+	string attestSign = 13;
+
+	/** [上链数据]存证类型标识。1文件存证，2hash存证 */
+	string attestType = 14;
+
+	/** [上链数据]业务类型。数据文件、视屏、音频、压缩等方式，参与bizSign生成，参与platformSign生成 not null*/
+	string bizType = 15;
+
+	/** [上链数据]源文件名。参与bizSign生成，参与platformSign生成 not null*/
+	string fileName = 16;
+
+	/** [上链数据]文件类型 参与bizSign生成，参与platformSign生成  not null*/
+	string fileType = 17;
+
+	/** [上链数据]源文件长度,以字节为单位。参与bizSign生成，参与platformSign生成  not null*/
+	string fileSize = 18;
+
+	/*  2017-10 该版本为存证平台内部生成字段，不参与本期接口输入，不参与上述两项签名。*/
+	/** [上链数据]文件签名。使用本人钱包私钥对该数据进行计算*/
+	string fileSign = 19;
+
+	/** [上链数据]文件哈希值。sm3。参与bizSign生成，参与platformSign生成  not null*/
+	string fileHash = 20;
+
+	/** [上链数据]存证人类型。1自然人，2法人，0其他 。参与bizSign生成，参与platformSign生成  not null*/
+	string ownerType = 21;
+
+	/** [上链数据]存证人身份标识。身份证号、社会信用代码 。参与bizSign生成，参与platformSign生成  not null*/
+	string ownerId = 22;
+
+	/** [上链数据]存证人名称。参与bizSign生成，参与platformSign生成  not null*/
+	string ownerName = 23;
+
+	/** [上链数据]存证起始时间  yyyymmdd-hhmmss*/
+	string originTime = 24;
+
+	/** [上链数据]当前存证起始时间  yyyymmdd-hhmmss*/
+	string startTime = 25;
+
+	/** [上链数据]当前存证持续时间(天),从start_time开始算.,全平台唯一标识.，参与platformSign生成  not null*/
+	string duration = 26;
+
+	/** [上链数据]存证描述信息  not null*/
+	string description = 27;
+
+	/** [上链数据]本次存证订单费用.  not null*/
+	string price = 28;
+
+	/**[上链数据]平台platformSign */
+	string platformSign = 29;
+}

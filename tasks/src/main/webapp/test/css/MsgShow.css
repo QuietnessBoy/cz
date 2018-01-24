@@ -1,0 +1,16 @@
+body {
+    background-color: #FFFAF8;
+    margin-left: 200px;
+}
+
+.wrapper{
+    width: 1500px;
+    padding: 20px 40px;
+}
+.row{
+    margin-right: 440px;
+}
+
+.jqChart{
+    padding-top:40px;
+}

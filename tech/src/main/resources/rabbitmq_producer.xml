@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+      http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+      http://www.springframework.org/schema/rabbit
+      http://www.springframework.org/schema/rabbit/spring-rabbit-1.1.xsd">
+
+    <!--<rabbit:connection-factory id="connectionFactory"-->
+                               <!--addresses="172.17.94.203:5672,172.17.94.204:5672"-->
+                               <!--username="guest"-->
+                               <!--password="guest"-->
+                               <!--virtual-host="/"-->
+                               <!--publisher-returns="true"-->
+                               <!--publisher-confirms="true"-->
+    <!--/>-->
+
+    <rabbit:connection-factory id="connectionFactory" username="guest" password="guest"
+                               host="localhost"
+                               port="5672"
+                               virtual-host="/"/>
+    <!--通过指定下面的admin信息，当前producer中的exchange和queue会在rabbitmq服务器上自动生成-->
+    <rabbit:admin connection-factory="connectionFactory"/>
+
+    <!--定义queue-->
+    <rabbit:queue id="com.mj.test5" name="test5" durable="true" auto-delete="false" exclusive="false"/>
+    <rabbit:queue id="com.mj.test6" name="test6" durable="true" auto-delete="false" exclusive="false"/>
+
+    <!-- 定义direct exchange，绑定com.mj.test queue -->
+    <rabbit:direct-exchange name="myChange" durable="true" auto-delete="false">
+        <rabbit:bindings>
+            <rabbit:binding queue="com.mj.test5" key="hello5"></rabbit:binding>
+            <rabbit:binding queue="com.mj.test6" key="hello6"></rabbit:binding>
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
+
+    <!--定义rabbit template用于数据的接收和发送-->
+    <rabbit:template id="myAmqpTemplate" connection-factory="connectionFactory" exchange="myChange"/>
+
+    <!-- 配置consumer, 监听的类和queue的对应关系 -->
+    <rabbit:listener-container
+            connection-factory="connectionFactory" acknowledge="manual" >
+        <rabbit:listener queues="com.mj.test5" ref="test5" />
+        <rabbit:listener queues="com.mj.test6" ref="test6" />
+    </rabbit:listener-container>
+</beans>

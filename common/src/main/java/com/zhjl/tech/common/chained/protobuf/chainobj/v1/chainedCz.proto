@@ -1,0 +1,26 @@
+syntax = "proto3";
+package com.zhjl.tech.store.chained.protobuf.chainobj.v1;
+
+message Cz {
+	////[上链数据]存证记录版本。格式：1-2^16递增版本号.版本号与字典有关联
+    /// the version right now is '1'
+    string version = 1;
+
+	/** [上链数据]订单号,全平台唯一标识. size=18*/
+  	string ordersn = 2;
+
+	/*是否过期。 0否，1是 */
+  	string expired = 3;
+
+	/**存证详情的json串。类型参见czDetail. json编码后的base编码形式 */
+  	bytes detail = 4;
+}
+
+//存证详细内容. endfix is '_1' means that it is the first edition of CzDetail
+message CzDetail_1 {
+    /**
+        订单信息的hash值，采用sm3生成，然后采用base64编码。
+        hash的生成方式参见对应版本对象的usage说明。
+    **/
+    bytes hash = 1;
+}

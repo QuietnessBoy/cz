@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhjl.tech.tasks.mapper.tasks.WarningMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Warning_List">
+		id, update_time AS updateTime, create_time AS createTime,biz_type AS bizType,ordersn,channel_ordersn AS channelOrdersn,num, remark
+	</sql>
+
+	<!--根据渠道订单号查询表信息-->
+	<select id="getWarningByChannelOrdersn" resultType="Warning">
+		select
+		<include refid="Warning_List"/>
+		FROM warning w
+		WHERE w.channel_ordersn=#{channelOrdersn}
+		limit 1
+	</select>
+
+	<!--根据渠道订单号和报警表类型查询表信息-->
+	<select id="getWarningByChannelOrdersnAndBizType" resultType="Warning">
+		select
+		<include refid="Warning_List"/>
+		FROM warning w
+		WHERE w.channel_ordersn=#{channelOrdersn} AND w.biz_type=#{bizType}
+		limit 1
+	</select>
+
+	<!--根据订单号查询表信息-->
+	<select id="getWarningByOrdersn" resultType="Warning">
+		select
+		<include refid="Warning_List"/>
+		FROM warning w
+		WHERE w.ordersn=#{ordersn}
+		limit 1
+	</select>
+
+</mapper>

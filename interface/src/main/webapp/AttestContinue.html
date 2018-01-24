@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../_vender/jquery/jquery-1.9.1.min.js"></script>
+    <script src="../_jsapp/attestStart.js"></script>
+</head>
+<body>
+    <form action="inters/AttestContinue" method="post">
+        <h2>北京知金链网络技术有限公司</h2>
+        <input id="attest" type="checkbox" checked="checked"><span>存证续期</span>
+
+        <div id="createAttestDetailMessage">
+            <ul>
+                <li>
+                    <span>签名:</span>
+                    <input type="text" name="sign" value="12345" maxlength="16">
+                </li>
+                <li>
+                    <span>请求标识:</span>
+                    <input type="text" name="accessKey" value="33333" maxlength="16">
+                </li>
+                <li>
+                    <span>随机数:</span>
+                    <input type="text" name="random" value="3222121" maxlength="32">
+                </li>
+                <li>
+                    <span>请求时间:</span>
+                    <input type="text" name="requestTime_date" value="20111111" maxlength="6">
+                </li>
+                <li>
+                    <span>存证号:</span>
+                    <input type="text" name="ordersn" value="8112865072383040" maxlength="32">
+                </li>
+                <li>
+                    <span>渠道用户ID:</span>
+                    <input type="text" name="channelUserid" value="12345" maxlength="50">
+                </li>
+                <li>
+                    <span>渠道订单号:</span>
+                    <input type="text" name="channelOrdersn" value="" maxlength="50">
+                </li>
+                <li>
+                    <span>公钥:</span>
+                    <input type="text" name="publicKey" value="12345" maxlength="64">
+                </li>
+                <li>
+                    <span>版本号:</span>
+                    <input type="text" name="version" value="12345" maxlength="10">
+                </li>
+                <li>
+                    <span>客户签名:</span>
+                    <input type="text" name="attestSign" value="12345" maxlength="64">
+                </li>
+                <li>
+                    <span>存证类型:</span>
+                    <input type="checkbox" checked="checked" name="attestType" value="1">
+                    <span>文件存证</span>
+                    <input type="checkbox" name="attestType" value="2">
+                    <span>Hash存证</span>
+                </li>
+                <li>
+                    <span>文件hash值:</span>
+                    <input type="text" name="sourceFileHash" value="12345" maxlength="32">
+                </li>
+                <li>
+                    <span>入链情况:</span>
+                    <input type="checkbox" checked="checked" name="chained" value="1">
+                    <span>是</span>
+                    <input type="checkbox" name="chained" value="0">
+                    <span>否</span>
+                </li>
+                <li>
+                    <span>钱包网络地址:</span>
+                    <input type="text" name="walletAddr" value="12345" maxlength="5">
+                </li>
+                <li>
+                    <span>业务类型:</span>
+                    <input type="checkbox" name="bizType" checked="checked" name="chained" value="1">
+                    <span>视频</span>
+                    <input type="checkbox" name="bizType" value="2" >
+                    <span>Hash存证</span>
+                </li>
+                <li>
+                    <span>渠道来源:</span>
+                    <input type="text" name="channelId" value="11" maxlength="2">
+                </li>
+                <li>
+                    <span>服务商:</span>
+                    <input type="text" name="provinderId" value="2" maxlength="2">
+                </li>
+                <li>
+                    <span>文件名称:</span>
+                    <input type="text" name="fileName" value="aaaaa" maxlength="24">
+                </li>
+                <li>
+                    <span>文件类型:</span>
+                    <input type="text" name="fileType" value="111" maxlength="4">
+                </li>
+                <li>
+                    <span>文件长度</span>
+                    <input type="text" name="fileSize" value="111" maxlength="6">
+                </li>
+                <li>
+                    <span>是否加密:</span>
+                    <input type="checkbox" checked="checked" name="encrypted" value="1" maxlength="1">
+                    <span>是</span>
+                    <input type="checkbox" name="encrypted" value="0" maxlength="1">
+                    <span>否</span>
+                </li>
+                <li>
+                    <span>代理人姓名:</span>
+                    <input type="text" name="agentName" value="adsad" maxlength="32">
+                </li>
+                <li>
+                    <span>代理人电话:</span>
+                    <input type="text" name="agentPhone" value="132132" maxlength="13">
+                </li>
+                <li>
+                    <span>代理人邮箱:</span>
+                    <input type="text" name="agentEmail" value="asfdas@qq.com" maxlength="18">
+                </li>
+                <li>
+                    <span>存证人id:</span>
+                    <input type="text" name="ownerId" value="asfdas@qq.com" maxlength="18">
+                </li>
+                <li>
+                    <span>存证人姓名:</span>
+                    <input type="text" name="ownerName" value="李四的" maxlength="32">
+                </li>
+                <li>
+                    <span>存证人类型:</span>
+                    <input type="checkbox" checked="checked"  name="ownerType" value="1" maxlength="1">
+                    <span>自然人</span>
+                    <input type="checkbox"  name="ownerType" value="2" maxlength="1">
+                    <span>法人</span>
+                    <input type="checkbox"  name="ownerType" value="3" maxlength="1">
+                    <span>其他</span>
+                </li>
+                <li>
+                    <span>存证人电话:</span>
+                    <input type="text" name="ownerPhone" value="11132312" maxlength="18">
+                </li>
+                <li>
+                    <span>存证人Email:</span>
+                    <input type="text" name="ownerEmail" value="asfdas@qq.com" maxlength="18">
+                </li>
+                <li>
+                    <span>存证起始时间:</span>
+                    <input type="text" name="originTime_date" value="20111111" maxlength="6">
+                </li>
+                <li>
+                    <span>当前存证起始时间:</span>
+                    <input type="text" name="startTime_date" value="20111111" maxlength="6">
+                </li>
+                <li>
+                    <span>存证时间长度:</span>
+                    <input type="text" name="duration" value="20" maxlength="4">
+                </li>
+                <li>
+                    <span>存证描述长度:</span>
+                    <input type="text" name="descLength" value="11" maxlength="2">
+                </li>
+                <li>
+                    <span>存证描述信息:</span>
+                    <input type="text" name="description" value="112sdafsadfasdfasdfasd1" maxlength="200">
+                </li>
+            </ul>
+        </div>
+        <p><input type="submit" id="sub" value="确定提交"></p>
+    </form>
+</body>
+</html>

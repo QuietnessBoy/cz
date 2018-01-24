@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhjl.tech.tasks.mapper.tasks.RabbitmqMsgMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="RabbitMqMsg_List">
+		id, create_time AS createTime, queue_name AS queueName, num
+	</sql>
+
+	<!--根据ordersn查找存证订单-->
+	<select id="getMsgByRabbitMqQueue" resultType="RabbitmqMsg">
+		select
+		<include refid="RabbitMqMsg_List"/>
+		FROM rabbitmq_msg rm
+		WHERE rm.queue_name = #{queueName}  AND create_time>=(select SUBDATE(now(),interval 60 second))
+		limit 60
+	</select>
+
+	<!--根据ordersn查找存证订单-->
+	<select id="getMsgByRabbitMqQueue1" resultType="RabbitmqMsg">
+		select
+		<include refid="RabbitMqMsg_List"/>
+		FROM rabbitmq_msg rm
+		WHERE rm.queue_name = #{queueName}  AND create_time>=(select SUBDATE(#{date},interval 60 second))
+		limit 60
+	</select>
+</mapper>

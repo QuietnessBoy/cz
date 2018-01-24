@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhjl.tech.tasks.mapper.tasks.FileCzFailedRecordMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="FileCzFailedRecord_List">
+		id, ordersn,channel_ordersn AS channelOrdersn,create_time AS createTime,state,msg
+	</sql>
+
+	<!--根据ordersn查询订单-->
+	<select id="getFileCzFailedRecordByOrdersn" resultType="FileCzFailedRecord">
+		select
+		<include refid="FileCzFailedRecord_List"/>
+		FROM fileczfailed_record a
+		WHERE a.ordersn = #{ordersn}
+		limit 1
+	</select>
+
+	<!--根据txid查询订单-->
+	<select id="getFileCzFailedRecordByChannelOrdersn" resultType="FileCzFailedRecord">
+		select
+		<include refid="FileCzFailedRecord_List"/>
+		FROM fileczfailed_record a
+		WHERE a.channelOrdersn = #{channelOrdersn}
+		limit 1
+	</select>
+
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhjl.tech.store.mapper.store.ConfigMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Config_List">
+		id, config_type AS configType, config_key AS configKey, config_value AS configValue, create_time AS createTime, remark
+	</sql>
+
+
+	<!--查询所有渠道信息-->
+	<select id="getAllByConfigs" resultType="Config">
+		select
+		<include refid="Config_List"/>
+		FROM config
+	</select>
+
+	<!--查询所有渠道信息-->
+	<select id="getConfigByConfigTypeCount" resultType="Config">
+		select
+		<include refid="Config_List"/>
+		FROM config cf GROUP BY cf.config_type
+	</select>
+
+	<!--查询所有渠道信息-->
+	<select id="getConfigByConfigType" resultType="Config">
+		select
+		<include refid="Config_List"/>
+		FROM config cf WHERE cf.config_type=#{config_type}
+	</select>
+</mapper>

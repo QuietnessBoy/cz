@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhjl.tech.inter.mapper.inter.ChannelMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Channel_List">
+		id, update_time AS updateTime, create_time AS createTime, channel_id AS channelId, channel_public_key AS channelPublicKey, channel_private_key AS channelPrivateKey, platform_publick_key AS platformPublickKey, platform_private_key AS platformPrivateKey, channel_ida AS channelIda,platform_ida AS platformIda, access_key AS accessKey, name, channel_type AS channelType, biz_duration AS bizDuration, scale, biz, url, address, contact, phone, verified, license_name AS licenseName, license_num AS licenseNum, account_name AS accountName, account_num AS accountNum, freezed
+	</sql>
+
+
+	<!--查询所有渠道信息-->
+	<select id="getAllByChannel" resultType="Channel">
+		select
+		<include refid="Channel_List"/>
+		FROM channel c
+	</select>
+
+	<!--根据渠道ID查询渠道信息-->
+	<select id="getChannelIdByChannel" resultType="Channel">
+		select
+		<include refid="Channel_List"/>
+		FROM channel c
+		WHERE c.channel_id=#{channel_id}
+		limit 1
+	</select>
+
+</mapper>

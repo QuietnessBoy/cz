@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+      http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+      http://www.springframework.org/schema/rabbit
+      http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd">
+
+
+    <rabbit:connection-factory id="connectionFactory" username="guest" password="guest"
+                               host="localhost"
+                               port="5672"
+                               virtual-host="/"/>
+
+    <!--通过指定下面的admin信息，当前producer中的exchange和queue会在rabbitmq服务器上自动生成-->
+    <rabbit:admin connection-factory="connectionFactory"/>
+
+    <!--<rabbit:queue id="com.mj.test" name="com.mj.test" durable="true" auto-delete="false" exclusive="false"/>-->
+    <rabbit:queue id="com.tech.receive" name="receive" durable="true" auto-delete="false" exclusive="false"/>
+
+    <bean id="receiver" class="com.zjl.tech.rabbitmq.receive.Receiver"></bean>
+
+    <rabbit:listener-container connection-factory="connectionFactory">
+        <rabbit:listener queues="com.tech.receive" ref="receiver"/>
+     </rabbit:listener-container>
+
+</beans>

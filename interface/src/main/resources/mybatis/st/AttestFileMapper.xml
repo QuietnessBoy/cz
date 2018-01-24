@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhjl.tech.store.mapper.store.AttestFileMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="AttestFile_List">
+		id, update_time AS updateTime, create_time AS createTime, ordersn, file_name AS fileName,file_addr AS fileAddr, file_size AS fileSize, file_hash AS fileHash, file_sign AS fileSign, encrypted, encrypt_alog AS encryptAlog, encrypt_key AS encryptKey
+	</sql>
+
+	<!--根据ordersn查找存证订单-->
+	<select id="getAttestFileByOrdersn" resultType="AttestFile">
+		select
+		<include refid="AttestFile_List"/>
+		FROM attest_file af
+		WHERE af.ordersn = #{ordersn}
+		limit 1
+	</select>
+</mapper>

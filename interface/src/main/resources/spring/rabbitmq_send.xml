@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+      http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+      http://www.springframework.org/schema/rabbit
+      http://www.springframework.org/schema/rabbit/spring-rabbit-1.1.xsd">
+
+    <!--配置connection-factory，指定连接rabbit server参数-->
+    <rabbit:connection-factory id="connectionFactory"
+                               addresses="${rabbit_host}"
+                               username="${rabbit_name}"
+                               password="${rabbit_pwd}"
+                               virtual-host="/"
+                               publisher-returns="true"
+                               publisher-confirms="true"
+    />
+
+    <!--通过指定下面的admin信息，当前producer中的exchange和queue会在rabbitmq服务器上自动生成-->
+    <rabbit:admin connection-factory="connectionFactory"/>
+
+    <!--定义queue. 前缀一般以接收方的项目前缀为名字。-->
+    <rabbit:queue id="com.zhjl.tech.attest.CreateFileCz" name="com.zhjl.tech.attest.CreateFileCz" durable="true" auto-delete="false" exclusive="false"/>
+    <rabbit:queue id="com.zhjl.tech.attest.CreateCzXq" name="com.zhjl.tech.attest.CreateCzXq" durable="true" auto-delete="false" exclusive="false"/>
+    <rabbit:queue id="com.zhjl.tech.attest.CreateHashCz" name="com.zhjl.tech.attest.CreateHashCz" durable="true" auto-delete="false" exclusive="false"/>
+
+    <!-- 定义direct exchange，绑定com.mj.Test queue -->
+    <rabbit:direct-exchange name="myChange" durable="true" auto-delete="false">
+        <rabbit:bindings>
+            <rabbit:binding queue="com.zhjl.tech.attest.CreateFileCz" key="${CreateFileCz}"></rabbit:binding>
+            <rabbit:binding queue="com.zhjl.tech.attest.CreateCzXq" key="${CreateCzXq}"></rabbit:binding>
+            <rabbit:binding queue="com.zhjl.tech.attest.CreateHashCz" key="${CreateHashCz}"></rabbit:binding>
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
+
+    <!--定义rabbit template用于数据的接收和发送-->
+    <rabbit:template id="myAmqpTemplate" connection-factory="connectionFactory" exchange="myChange"/>
+
+
+</beans>

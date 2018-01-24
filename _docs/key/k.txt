@@ -1,0 +1,113 @@
+[wind@bogon rsa]$ openssl x509 -in cert.pem -inform pem -noout -text
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 9246589447132761715 (0x80527c1c94394e73)
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=cn, ST=bj, L=beijing, O=zjl, OU=tech, CN=common/emailAddress=a@f.com
+        Validity
+            Not Before: Sep 11 17:31:05 2017 GMT
+            Not After : Oct 11 17:31:05 2017 GMT
+        Subject: C=cn, ST=bj, L=beijing, O=zjl, OU=tech, CN=common/emailAddress=a@f.com
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (1024 bit)
+                Modulus:
+                    00:b2:3d:82:92:1c:09:c0:59:66:54:fd:d0:d1:7f:
+                    66:72:ae:be:7b:c6:07:49:c8:96:ba:51:25:c5:10:
+                    a3:24:1e:45:5e:51:00:2f:ff:aa:b8:7c:0c:99:62:
+                    ee:4b:8e:5f:5a:ee:2d:b1:91:23:63:fb:50:0c:35:
+                    50:4d:07:e5:41:d3:94:b6:ef:b7:33:18:51:af:5e:
+                    31:d9:21:fe:f0:f8:de:3a:f6:b7:17:0b:e3:c0:04:
+                    d9:d5:90:83:6e:95:27:07:c9:ac:0e:e2:8e:99:96:
+                    e1:c6:ed:7d:9a:17:49:c1:db:6b:02:cf:46:1b:2e:
+                    35:40:c7:90:dc:00:b1:6c:41
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Subject Key Identifier: 
+                40:AA:10:6D:B4:62:E1:34:3D:93:B0:A0:3D:2D:F0:2F:19:0C:82:54
+            X509v3 Authority Key Identifier: 
+                keyid:40:AA:10:6D:B4:62:E1:34:3D:93:B0:A0:3D:2D:F0:2F:19:0C:82:54
+
+            X509v3 Basic Constraints: 
+                CA:TRUE
+    Signature Algorithm: sha256WithRSAEncryption
+         ae:bc:47:1f:fc:06:d8:58:85:d1:42:f7:99:58:11:91:b2:94:
+         4b:2f:3c:44:a9:74:61:d0:68:9c:c0:be:be:42:53:ab:f0:9b:
+         74:68:59:81:ff:bb:e3:29:99:2b:97:76:b2:11:ea:2b:ec:f2:
+         7b:96:fa:3b:6d:56:5e:87:94:2a:4a:cd:c0:ac:ad:80:67:c5:
+         7f:d9:d4:c1:a2:00:4f:4a:bd:d0:5e:71:40:a4:7c:b4:43:f0:
+         15:98:97:65:2e:90:06:bb:af:94:22:1c:c3:da:38:83:c5:d1:
+         bc:27:04:29:1d:c4:41:1f:73:7f:eb:fe:61:93:61:bb:53:9d:
+         4c:61
+
+
+
+
+
+[wind@bogon rsa]$ sudo openssl  rsa -in key.pem -pubout -text
+[sudo] password for wind: 
+Private-Key: (1024 bit)
+modulus:
+    00:b2:3d:82:92:1c:09:c0:59:66:54:fd:d0:d1:7f:
+    66:72:ae:be:7b:c6:07:49:c8:96:ba:51:25:c5:10:
+    a3:24:1e:45:5e:51:00:2f:ff:aa:b8:7c:0c:99:62:
+    ee:4b:8e:5f:5a:ee:2d:b1:91:23:63:fb:50:0c:35:
+    50:4d:07:e5:41:d3:94:b6:ef:b7:33:18:51:af:5e:
+    31:d9:21:fe:f0:f8:de:3a:f6:b7:17:0b:e3:c0:04:
+    d9:d5:90:83:6e:95:27:07:c9:ac:0e:e2:8e:99:96:
+    e1:c6:ed:7d:9a:17:49:c1:db:6b:02:cf:46:1b:2e:
+    35:40:c7:90:dc:00:b1:6c:41
+publicExponent: 65537 (0x10001)
+privateExponent:
+    00:a7:ad:4f:e9:4d:f1:2a:7f:af:d2:22:d8:d0:4c:
+    ee:be:d2:7f:26:07:7c:91:bf:df:74:35:a4:b7:87:
+    d8:41:c1:2c:76:f6:f2:9b:35:04:90:fb:3a:0b:0e:
+    53:a8:c6:ae:13:e7:df:1a:9d:b4:52:79:78:ab:93:
+    78:10:8f:6d:ee:75:7b:09:97:4c:ff:12:1c:fb:92:
+    10:27:4d:68:11:ff:1e:57:9a:19:47:25:33:7d:52:
+    10:48:a5:82:6b:e3:8d:c7:f4:96:0d:fc:6e:f0:c5:
+    1c:47:39:e3:01:eb:01:d3:c9:b6:c0:02:53:02:39:
+    95:0c:4d:12:c1:2e:e8:4e:d5
+prime1:
+    00:e3:93:75:ba:a9:d8:d1:d9:c2:5c:99:5a:fd:79:
+    55:e2:df:4a:82:5f:b9:d0:d5:84:e3:72:48:4b:d0:
+    04:40:0c:95:cb:f8:86:65:73:2b:ee:c7:d2:8b:ba:
+    ec:e5:75:bc:99:2f:67:37:34:10:e2:5c:c1:0b:24:
+    23:e1:54:28:2f
+prime2:
+    00:c8:80:95:75:a6:98:46:ca:c8:13:63:a9:70:b2:
+    ab:32:29:d8:8a:29:75:b5:e2:ac:f6:74:7d:d3:b1:
+    3c:e8:1c:98:12:fa:3d:64:91:49:1b:af:0e:a0:b0:
+    f9:e9:75:96:16:74:05:8e:37:90:f0:84:fe:3d:17:
+    44:c0:c8:26:8f
+exponent1:
+    30:9f:26:be:14:df:c0:26:18:42:94:79:3e:42:98:
+    38:fa:9f:fe:ae:d9:12:67:2c:17:34:29:82:19:15:
+    6f:61:c0:f7:6d:47:b9:91:1b:c7:ce:65:8b:79:0a:
+    78:13:e9:91:88:f1:32:78:2b:4b:51:a9:e4:e9:79:
+    c9:00:a3:fd
+exponent2:
+    77:bd:ab:04:b7:38:6b:d6:c0:c4:2b:99:ce:8f:35:
+    84:60:cf:4c:3b:d4:6b:8a:73:27:40:8c:c0:b7:31:
+    9b:a1:30:04:ed:63:6a:c3:05:79:3e:03:ab:5d:e5:
+    f2:51:e2:0f:88:bc:a4:a1:74:b2:df:8a:02:2b:fa:
+    48:73:7f:eb
+coefficient:
+    72:91:a2:83:ad:64:78:b1:b9:55:4a:a1:f5:89:88:
+    a3:d5:4e:8a:4f:2a:74:e6:b5:60:03:9d:2c:09:9f:
+    f7:15:ca:13:9b:59:7e:ed:be:67:b5:7e:9c:41:01:
+    c0:05:90:8c:9f:23:76:80:06:8c:99:a4:e0:19:12:
+    48:a2:b5:dd
+writing RSA key
+-----BEGIN PUBLIC KEY-----
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCyPYKSHAnAWWZU/dDRf2Zyrr57
+xgdJyJa6USXFEKMkHkVeUQAv/6q4fAyZYu5Ljl9a7i2xkSNj+1AMNVBNB+VB05S2
+77czGFGvXjHZIf7w+N469rcXC+PABNnVkINulScHyawO4o6ZluHG7X2aF0nB22sC
+z0YbLjVAx5DcALFsQQIDAQAB
+-----END PUBLIC KEY-----
+
+
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCyPYKSHAnAWWZU/dDRf2Zyrr57xgdJyJa6USXFEKMkHkVeUQAv/6q4fAyZYu5Ljl9a7i2xkSNj+1AMNVBNB+VB05S277czGFGvXjHZIf7w+N469rcXC+PABNnVkINulScHyawO4o6ZluHG7X2aF0nB22sCz0YbLjVAx5DcALFsQQIDAQAB
+
+

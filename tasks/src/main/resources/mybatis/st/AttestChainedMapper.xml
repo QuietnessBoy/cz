@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhjl.tech.tasks.mapper.tasks.AttestChainedMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="AttestChained_List">
+		id, ordersn,channel_ordersn AS channelOrdersn, txid, send_time AS sendTime,refresh_time AS refreshTime, create_time AS createTime,num, state,remark
+	</sql>
+
+	<!--根据ordersn查询订单-->
+	<select id="getAttestChainedByOrdersn" resultType="AttestChained">
+		select
+		<include refid="AttestChained_List"/>
+		FROM attest_chained a
+		WHERE a.ordersn = #{ordersn}
+		limit 1
+	</select>
+
+	<!--根据txid查询订单-->
+	<select id="getAttestChainedByTxId" resultType="AttestChained">
+		select
+		<include refid="AttestChained_List"/>
+		FROM attest_chained a
+		WHERE a.txid = #{txid}
+		limit 1
+	</select>
+
+	<!--根据订单处理次数查询订单-->
+	<select id="getAttestChainedByNum" resultType="AttestChained">
+		select
+		<include refid="AttestChained_List"/>
+		FROM attest_chained a
+		WHERE a.num >=#{num}
+		limit 500
+	</select>
+
+	<!--查询refreshTime最早的记录-->
+	<select id="getAttestChainedByMinRefreshTime" resultType="AttestChained">
+		select
+		<include refid="AttestChained_List"/>
+		FROM attest_chained a
+		WHERE a.refresh_time=(SELECT min(refresh_time)  FROM attest_chained b where NOT( ( b.state = #{state1} or b.state = #{state2}) and (DATE_ADD(b.send_time, INTERVAL 1 MINUTE)) > NOW() ))
+		AND NOT ( (a.state = #{state1} or a.state = #{state2}) and (DATE_ADD(a.send_time, INTERVAL 1 MINUTE)) > NOW())
+		limit 1
+	</select>
+</mapper>

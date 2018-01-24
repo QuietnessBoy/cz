@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+      http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+      http://www.springframework.org/schema/rabbit
+      http://www.springframework.org/schema/rabbit/spring-rabbit-1.1.xsd">
+
+    <rabbit:connection-factory id="connectionFactory"
+                               addresses="127.0.0.1:5672,127.0.0.1:9991,127.0.0.1:9993"
+                               username="guest"
+                               password="guest"
+                               virtual-host="/"
+                               publisher-returns="true"
+                               publisher-confirms="true"
+    />
+    <!--<rabbit:connection-factory id="connectionFactory" username="guest" password="guest"-->
+                               <!--host="localhost"-->
+                               <!--port="5672"-->
+                               <!--virtual-host="/"/>-->
+
+    <!--通过指定下面的admin信息，当前producer中的exchange和queue会在rabbitmq服务器上自动生成-->
+    <rabbit:admin connection-factory="connectionFactory"/>
+
+    <!--<rabbit:queue id="com.mj.test" name="com.mj.test" durable="true" auto-delete="false" exclusive="false"/>-->
+    <rabbit:queue id="com.mj.test5" name="test5" durable="true" auto-delete="false" exclusive="false"/>
+    <rabbit:queue id="com.mj.test6" name="test6" durable="true" auto-delete="false" exclusive="false"/>
+
+
+    <bean id="messageReceiver5" class="com.zjl.tech.rabbitmq.spring.MessageReceiver5"></bean>
+    <bean id="messageReceiver" class="com.zjl.tech.rabbitmq.spring.MessageReceiver"></bean>
+
+    <rabbit:listener-container connection-factory="connectionFactory">
+        <rabbit:listener queues="com.mj.test5" ref="messageReceiver5"/>
+        <rabbit:listener queues="com.mj.test6" ref="messageReceiver"/>
+     </rabbit:listener-container>
+
+</beans>

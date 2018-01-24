@@ -1,0 +1,34 @@
+存放必要的说明文档、数据库表备份等。
+
+1.maven 默认编码是GBK，修改UTF-8为默认编码.设置环境变量。变量名 MAVEN_OPTS，变量值 -Xms256m -Xmx512m -Dfile.encoding=UTF-8。
+  命令：mvn -v    查询maven详细信息，产看maven编码格式。
+2.本地环境版本：dev
+  正式环境版本：pro
+  测试环境版本：testpro
+  执行命令：mvn install              默认打包dev本地环境版本
+  执行命令：mvn install -P testpro   打包成testpro测试环境版本
+  执行命令：mvn install -P pro       打包成pro正式环境版本
+3.日志文件路径            日志文件名称
+  interface         /logs/interface-20171229.log
+  attest            /logs/attest-20171229.log
+  store             /logs/store-20171229.log
+  ordersn           /logs/ordersn-20171229.log
+  channelTest       /logs/channelTest-20171229.log
+  tasks             /logs/tasks-20171229.log
+
+  配置说明：
+    1.在cz应用下的pom.xml文件 <profiles>中自定义属性值，设置对应模块日志文件路径及日志输出级别
+    2.在common/resources资源文件夹中增加zjl.properties文件，设置变量，获取cz应用下pom.xml文件映射过来的对应属性值
+    3.在各个应用下的resources资源文件夹下的logback.xml文件中，以${xxx}形式获取zjl.properties中的属性值
+
+4.配置文件路径
+  dev:
+  直接采用项目中的
+  testpro:
+  /zjlcz/config.testpro.properties
+  pro:
+  /zjlcz/config.pro.properties
+
+
+数据库说明
+config表：config_type表中

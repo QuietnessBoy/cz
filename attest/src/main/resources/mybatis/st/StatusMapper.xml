@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhjl.tech.attest.mapper.attest.StatusMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Status_List">
+		id, update_time AS updateTime, create_time AS createTime, ordersn, channel_ordersn AS channelOrdersn,state_biz AS stateBiz,state_notify AS stateNotify,num,remark
+	</sql>
+
+	<!--根据渠道唯一标识查询订单-->
+	<select id="getStatusByChannelOrdersn" resultType="Status">
+		select
+		<include refid="Status_List"/>
+		FROM status s
+		WHERE s.channel_ordersn=#{channel_ordersn}
+		limit 1
+	</select>
+
+	<!--根据订单号查询订单-->
+	<select id="getStatusByOrdersn" resultType="Status">
+		select
+		<include refid="Status_List"/>
+		FROM status s
+		WHERE s.ordersn=#{ordersn}
+		limit 1
+	</select>
+
+	<!--根据订单异常处理次数查询订单-->
+	<select id="getStatusByNum" resultType="Status">
+		select
+		<include refid="Status_List"/>
+		FROM status s
+		WHERE s.num >=#{num}
+		limit 500
+	</select>
+
+	<!--根据订单状态查询订单-->
+	<select id="getStatusByStateBiz" resultType="Status">
+		select
+		<include refid="Status_List"/>
+		FROM status s
+		WHERE s.state_biz =#{state}
+	</select>
+
+	<!--根据订单状态查询2分钟以外回调请求失败的订单-->
+	<select id="getStatusByStateNotifyInTime" resultType="Status">
+		select
+		<include refid="Status_List"/>
+		FROM status s
+		WHERE s.state_notify = #{state} AND DATE_SUB(NOW(), INTERVAL 2 MINUTE)>=s.update_time AND #{num} > s.num
+		limit 500
+	</select>
+
+	<!--根据订单状态查询2分钟以外为请求失败的订单-->
+	<select id="getStatusByStateBizInTime" resultType="Status">
+		select
+		<include refid="Status_List"/>
+		FROM status s
+		WHERE s.state_biz = #{state} AND DATE_SUB(NOW(), INTERVAL 2 MINUTE)>=s.update_time AND #{num} > s.num
+		limit 500
+	</select>
+
+	<!--查询全部处理成功订单-->
+	<select id="getStatusByMoreStateBiz" resultType="Status">
+		select
+		<include refid="Status_List"/>
+		FROM status s
+		WHERE s.state_biz = #{state1} OR s.state_biz=#{state2} OR s.state_biz=#{state3}
+	</select>
+
+	<!--更新status表的 num字段：num+1；updatetime：当前时间 remark字段-->
+	<update id="updateStatusByChannelOrdersn">
+		UPDATE
+		status s
+		set s.num = s.num+1 , s.remark = #{remark} , s.update_time = NOW() WHERE s.channel_ordersn=#{channelordersn}
+	</update>
+</mapper>
